@@ -20,7 +20,7 @@ class GHAPI:
             for pull in r.json():
                 for labels in pull["labels"]:
                     if "infrared" in labels["name"]:
-                        prs.append({pull['title'] : pull['html_url']})
+                        prs.append({pull['html_url'] : [pull['title'], pull['user']['login']]})
                 resp[repo] = prs
             prs = []
         return resp

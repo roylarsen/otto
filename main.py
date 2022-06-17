@@ -39,8 +39,8 @@ def get_prs(repos, format):
         for repo, prs in gh.get_prs(repos).items():
             print("*{0}*".format(repo))
             for pr in prs:
-                for name, url in pr.items():
-                    print("\t* {0} - {1}".format(name, url))
+                for url, details in pr.items():
+                    print("\t* {0} \n\t\t* {1} \n\t\t* {2}".format(url, details[0], details[1]))
     else:
         print(gh.get_prs(repos))
 
