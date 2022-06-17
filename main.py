@@ -1,8 +1,22 @@
 import click, os
 from ghapi.ghapi import GHAPI
 
-@click.group("otto")
+@click.group("bd")
 def cli():
+    pass
+
+@cli.group("config")
+def config():
+    """Sub-commands related to configuring the bd tool"""
+    pass
+
+@cli.group("deploy")
+def deploy():
+    """Sub-commands involved in deployments
+    \n\r\t With Great Power Comes Great Responsibity 
+    \n\t\t- Uncle Ben 
+    \n\r\t\t\t- Roy Larsen
+    """
     pass
 
 @cli.group("gh")
@@ -10,11 +24,6 @@ def gh():
     """Sub-commands involved in managing GitHub"""
     if os.environ.get("GITHUB_TOKEN") is None:
         print("Please make sure to set the GITHUB_TOKEN environment variable with your GitHubPAT")
-    pass
-
-@cli.group("deploy")
-def deploy():
-    """Sub-commands involved in deployments"""
     pass
 
 @gh.command()
