@@ -7,12 +7,15 @@ def cli():
 
 @cli.group("config")
 def config():
-    """Sub-commands related to configuring the bd tool"""
+    """NOT IMPLEMENTED
+    Sub-commands related to configuring the bd tool
+    """
     pass
 
 @cli.group("deploy")
 def deploy():
-    """Sub-commands involved in deployments
+    """NOT IMPLEMENTED
+    Sub-commands involved in deployments
     \n\r\t With Great Power Comes Great Responsibity 
     \n\t\t- Uncle Ben 
     \n\r\t\t\t- Roy Larsen
@@ -21,7 +24,7 @@ def deploy():
 
 @cli.group("gh")
 def gh():
-    """Sub-commands involved in managing GitHub"""
+    """Sub-commands involved in retrieving information from GitHub"""
     if os.environ.get("GITHUB_TOKEN") is None:
         print("Please make sure to set the GITHUB_TOKEN environment variable with your GitHubPAT")
     pass
@@ -40,7 +43,7 @@ def get_prs(repos, format):
             print("*{0}*".format(repo))
             for pr in prs:
                 for url, details in pr.items():
-                    print("\t* {0} \n\t\t* {1} \n\t\t* {2}".format(url, details[0], details[1]))
+                    print(" * {0} \n\t* {1} \n\t* {2}".format(url, details[0], details[1]))
     else:
         print(gh.get_prs(repos))
 

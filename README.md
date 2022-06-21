@@ -8,6 +8,8 @@ Banyan Deployments tool. MHB Infrared has a lot of tasks that involve us repeati
 
 ## Planned Features
 
-* Driven by config (~/.bd.conf)
-* Workflow kickoffs in banyan-deployments
 * Installable by PIP
+* Driven by config (~/.bd.conf)
+* Update checks
+* Workflow kickoffs in banyan-deployments
+* Modular CLI
