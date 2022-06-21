@@ -1,6 +1,13 @@
-# bd
+# otto
 
-Banyan Deployments tool. MHB Infrared has a lot of tasks that involve us repeating the same things over and over again, so I wanted to automate those
+DevOps Automation tool. There's a lot of tasks that involve us repeating the same things over and over again, so I wanted to automate those
+
+## Name Origins
+
+The name `otto` comes from the Vermont Technical College radio station automation software. `otto`
+handles (handled? - not sure if it's still used, it was a gross mess of Perl written by college students)
+playing music and station IDs while there wasn't an active DJ. `otto` also handled scheduling requests taken
+in over the Website.
 
 ## Completed Features
 
