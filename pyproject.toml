@@ -22,7 +22,7 @@ classifiers = [
 "Bug Tracker" = "https://github.com/mhroylarsen/otto/issues"
 
 [project.scripts]
-otto = "otto.cli.main:main"
+otto = "otto.cli.main:cli"
 
 [dependencies]
 click = "^8.1"
