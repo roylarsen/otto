@@ -1,7 +1,7 @@
 import click, os
-from ghapi.ghapi import GHAPI
+from otto.ghapi.ghapi import GHAPI
 
-@click.group("bd")
+@click.group("otto")
 def cli():
     pass
 
