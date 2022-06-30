@@ -46,9 +46,15 @@ def gh():
 @click.option("-f", "--format", is_flag=True, default=False, help="Formats the output for posting on Slack")
 def get_prs(repos, format):
     """Gets PRs based on rules"""
-    if os.environ.get("GITHUB_TOKEN") is not None:
-        token = os.environ.get("GITHUB_TOKEN")
-    gh = GHAPI(ghtoken=token)
+    config = ConfigFile()
+
+    if config.check():
+        pat = config.getvaluefromfile("github.pat")
+    else:
+        print("Config not found at {0}. Please run `otto config create` to generate the config in your Homedir.".format(config.conffile))
+        return
+    
+    gh = GHAPI(ghtoken=pat)
 
     if format:
         for repo, prs in gh.get_prs(repos).items():

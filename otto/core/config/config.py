@@ -4,6 +4,7 @@ from importlib import import_module
 
 class Config:
     def printmods(self):
+        """Retrieves the config packages from the utility modules -- Needs to be renamed."""
         import otto.utils
         packages = {}
         for sub in walk_packages(otto.utils.__path__, otto.utils.__name__ + "."):
@@ -15,6 +16,7 @@ class Config:
         return packages
     
     def generate(self):
+        """Generates a config in the user's home directory from the utility modules"""
         utilconfigs = self.printmods()
         configdoc = tomlkit.document()
         for tableheader, tablevalue in utilconfigs.items():
@@ -23,3 +25,9 @@ class Config:
                 table.add(value, "")
             configdoc.add(tableheader, table)
         return tomlkit.dumps(configdoc)
+    
+    def getvaluefromconfig(self, configctx, valuelookup):
+        """Takes the config value lookuo, and looks it up against the config context"""
+        parsedctx = tomlkit.parse(configctx)
+
+        return parsedctx[valuelookup[0]][valuelookup[1]]

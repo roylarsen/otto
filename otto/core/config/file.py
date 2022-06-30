@@ -19,3 +19,15 @@ class ConfigFile:
         otconf = Config()
         file.write(otconf.generate())
         file.close()
+    
+    def getvaluefromfile(self, value):
+        """Takes a dotted notation variable reference: module.variable"""
+        valuelist = value.split(".")
+
+        from .config import Config
+        otconf = Config()
+
+        with open(self.conffile) as conffile:
+            config = conffile.read()
+
+        return otconf.getvaluefromconfig(config, valuelist)       
