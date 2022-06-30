@@ -59,22 +59,29 @@ def get_prs(repos, format):
     """Gets PRs based on rules"""
     config = ConfigFile()
 
+    valueobj = {}
     if config.check():
-        pat = config.getvaluefromfile("github.pat")
+        valueobj["pat"] = config.getvaluefromfile("github.pat")
+        valueobj["repos"] = config.getvaluefromfile("github.repos")
+        valueobj["labels"] = config.getvaluefromfile("github.labels")
     else:
         print("Config not found at {0}. Please run `otto config create` to generate the config in your Homedir.".format(config.conffile))
         return
     
-    gh = GHAPI(ghtoken=pat)
+    for k,v in valueobj.items():
+        if "UNSET - " in v:
+            print("Default value for github.{0} found! Please update to a correct value.".format(k))
+            return
+    gh = GHAPI(ghtoken=valueobj["pat"])
 
     if format:
-        for repo, prs in gh.get_prs(repos).items():
+        for repo, prs in gh.get_prs(valueobj["repos"], valueobj["labels"]).items():
             print("*{0}*".format(repo))
             for pr in prs:
                 for url, details in pr.items():
                     print(" * {0} \n\t* Title: {1} \n\t* Author: {2}".format(url, details[0], details[1]))
     else:
-        print(gh.get_prs(repos))
+        print(gh.get_prs(valueobj["repos"], valueobj["labels"]))
 
 if __name__ == "__main__":
     cli()

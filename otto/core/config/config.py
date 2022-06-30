@@ -13,7 +13,7 @@ class Config:
         for tableheader, tablevalue in utilconfigs.items():
             table = tomlkit.table()
             for value in tablevalue:
-                table.add(value, "")
+                table.add(value, utilconfigs[tableheader][value])
             configdoc.add(tableheader, table)
         return tomlkit.dumps(configdoc)
 

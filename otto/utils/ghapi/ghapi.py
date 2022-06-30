@@ -6,7 +6,7 @@ class GHAPI:
         self.ghurl = "https://api.github.com/repos/hca-mobilehb/"
         self.ghtoken = ghtoken
 
-    def get_prs(self, repos):
+    def get_prs(self, repos, labels):
         headers = {
             "authorization" : "bearer " + self.ghtoken,
             "Accept": "application/vnd.github.v3+json"
