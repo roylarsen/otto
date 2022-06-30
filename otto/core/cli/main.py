@@ -1,5 +1,6 @@
 import click, os
-from otto.ghapi.ghapi import GHAPI
+from otto.utils.ghapi.ghapi import GHAPI
+from otto.core.config.file import ConfigFile
 
 @click.group("otto")
 def cli():
@@ -7,10 +8,21 @@ def cli():
 
 @cli.group("config")
 def config():
-    """NOT IMPLEMENTED
+    """
     Sub-commands related to configuring the bd tool
     """
     pass
+
+@config.command()
+def create():
+    """Creates a new config if none exists"""
+    config = ConfigFile()
+
+    if not config.check():
+        print("Creating new config at {0}".format(config.conffile))
+        config.create()
+    else:
+        print("Config already exists at {0}".format(config.conffile))
 
 @cli.group("deploy")
 def deploy():
