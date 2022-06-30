@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "otto"
-version = "0.0.2"
+version = "0.0.5"
 authors = [
   { name="Roy Larsen", email="roy.larsen@mobileheartbeat.com" },
 ]
@@ -27,3 +27,4 @@ otto = "otto.cli.main:cli"
 [dependencies]
 click = "^8.1"
 requests = "^2.28"
+tomlkit = "^0.11.0"
