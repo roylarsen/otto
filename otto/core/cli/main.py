@@ -53,9 +53,8 @@ def gh():
     pass
 
 @gh.command()
-@click.option("-r", "--repos", default="mh-iac,banyan-deployments", help="Comma separated list of repositories to get PRs from. By default, mh-iac and banyan-deployments")
 @click.option("-f", "--format", is_flag=True, default=False, help="Formats the output for posting on Slack")
-def get_prs(repos, format):
+def get_prs( format):
     """Gets PRs based on rules"""
     config = ConfigFile()
 
