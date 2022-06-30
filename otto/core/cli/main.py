@@ -1,4 +1,5 @@
 import click, os
+from otto.utils.ghapi.config import Config
 from otto.utils.ghapi.ghapi import GHAPI
 from otto.core.config.file import ConfigFile
 
@@ -24,6 +25,18 @@ def create():
     else:
         print("Config already exists at {0}".format(config.conffile))
 
+@config.command()
+def update():
+    """Updates an already existing configuration"""
+    config = ConfigFile()
+
+    if config.check():
+        print("Updating existing config at {0}".format(config.conffile))
+        config.update()
+    else:
+        print("Config not found at {0}".format(config.conffile))
+
+
 @cli.group("deploy")
 def deploy():
     """NOT IMPLEMENTED
@@ -37,8 +50,6 @@ def deploy():
 @cli.group("gh")
 def gh():
     """Sub-commands involved in retrieving information from GitHub"""
-    if os.environ.get("GITHUB_TOKEN") is None:
-        print("Please make sure to set the GITHUB_TOKEN environment variable with your GitHubPAT")
     pass
 
 @gh.command()

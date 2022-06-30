@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "otto"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
   { name="Roy Larsen", email="roy.larsen@mobileheartbeat.com" },
 ]

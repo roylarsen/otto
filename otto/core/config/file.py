@@ -28,6 +28,22 @@ class ConfigFile:
         otconf = Config()
 
         with open(self.conffile) as conffile:
-            config = conffile.read()
+            configctx = conffile.read()
 
-        return otconf.getvaluefromconfig(config, valuelist)       
+        return otconf.getvaluefromconfig(configctx, valuelist)
+
+    def update(self):
+        """Handles opening the config for writing"""
+
+        with open(self.conffile) as conffile:
+            configctx = conffile.read()
+        print("Updating old config content:\n{0}".format(configctx))
+
+        from .config import Config
+        otconf = Config()
+
+        conffile = open(self.conffile, 'w', encoding="utf-8")
+        updatedconf = otconf.update(configctx)
+        print("Updated config content:\n {0}".format(updatedconf))
+        conffile.write(updatedconf)
+        conffile.close()
