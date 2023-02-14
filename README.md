@@ -22,7 +22,7 @@ in over the Website.
 ## Planned Features
 
 * Add Testing. PyTest or Tox
-* Add support for templating for more easy Banyan testing
+* Add support for templating for more easy Banyan/Terraform/Infrstructure testing
 * Fix variables so there's more consistency
 * Add better validation between a modules expoected configuration and what's provided by the config file
 * Update checks

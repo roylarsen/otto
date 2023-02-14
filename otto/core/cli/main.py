@@ -55,7 +55,7 @@ def gh():
 @gh.command()
 @click.option("-f", "--format", is_flag=True, default=False, help="Formats the output for posting on Slack")
 def get_prs( format):
-    """Gets PRs based on rules"""
+    """Gets PRs based on otto configuration"""
     config = ConfigFile()
 
     valueobj = {}
@@ -81,6 +81,27 @@ def get_prs( format):
                     print(" * {0} \n\t* Title: {1} \n\t* Author: {2}".format(url, details[0], details[1]))
     else:
         print(gh.get_prs(valueobj["repos"], valueobj["labels"]))
+
+@gh.command()
+def get_workflows():
+    """Get workflow lists for watched repos in the config"""
+    config = ConfigFile()
+
+    valueobj = {}
+    if config.check():
+        valueobj["pat"] = config.getvaluefromfile("github.pat")
+        valueobj["repos"] = config.getvaluefromfile("github.repos")
+    else:
+        print("Config not found at {0}. Please run `otto config create` to generate the config in your Homedir.".format(config.conffile))
+        return
+    
+    gh = GHAPI(ghtoken = valueobj["pat"])
+
+    workflows = gh.get_workflows(valueobj["repos"])
+    for repo, workflow_names in workflows.items():
+        print("{0}:\t".format(repo))
+        for name in workflow_names:
+            print("{0}".format(name))
 
 if __name__ == "__main__":
     cli()
