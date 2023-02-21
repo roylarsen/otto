@@ -77,8 +77,7 @@ def get_prs( format):
         for repo, prs in gh.get_prs(valueobj["repos"], valueobj["labels"]).items():
             print("*{0}*".format(repo))
             for pr in prs:
-                for url, details in pr.items():
-                    print(" * {0} \n\t* Title: {1} \n\t* Author: {2}".format(url, details[0], details[1]))
+                print(" * {0} \n\t* Title: {1} \n\t* Author: {2}".format(pr['node']['url'], pr['node']['title'], pr['node']['author']['login']))
     else:
         print(gh.get_prs(valueobj["repos"], valueobj["labels"]))
 
