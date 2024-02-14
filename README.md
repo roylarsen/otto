@@ -11,7 +11,7 @@ in over the Website.
 
 ## Installation instructions
 
-`pip install git+ssh://git@github.com/mhroylarsen/otto.git#otto --user`
+`pip install git+ssh://git@github.com/roylarsen/otto.git#otto --user`
 
 ## Completed Features
 
