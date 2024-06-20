@@ -2,6 +2,7 @@ import click, os
 from otto.utils.ghapi.config import Config
 from otto.utils.ghapi.ghapi import GHAPI
 from otto.core.config.file import ConfigFile
+from otto.utils.azapi.azapi import AZAPI
 
 @click.group("otto")
 def cli():
@@ -101,6 +102,31 @@ def get_workflows():
         print("{0}:\t".format(repo))
         for name in workflow_names:
             print("{0}".format(name))
+
+@cli.group("az")
+def az():
+    """
+    Commands for AZ support
+    """
+
+@az.command()
+@click.option("-kv", "--kv-name", required=True, help="Name of the Key Vault to get secrets of")
+def get_secrets(kv_name):
+    """Retrieves all secrets for a given Key Vault"""
+    
+    az = AZAPI(os.environ["ARM_CLIENT_ID"], os.environ["ARM_CLIENT_SECRET"], os.environ["ARM_TENANT_ID"])
+
+    az.get_secrets(kv_name)
+
+@az.command()
+@click.option("-kv", "--kv-name", required=True, help="Name of the Key Vault to get secrets of")
+@click.option("-s", "--secret-name", required=True, help="Name of the Secret to get Value of")
+def get_secret(kv_name, secret_name):
+    """Retrieves a specific secret for a given Key Vault"""
+    
+    az = AZAPI(os.environ["ARM_CLIENT_ID"], os.environ["ARM_CLIENT_SECRET"], os.environ["ARM_TENANT_ID"])
+
+    az.get_secret(kv_name, secret_name)
 
 if __name__ == "__main__":
     cli()
